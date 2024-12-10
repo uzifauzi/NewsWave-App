@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../widgets/main_news_card.dart';
 
@@ -7,29 +8,57 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.blue[50],
+        backgroundColor: Color(0xfffcfffd),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const PageHeader(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'For you',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-                ),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.add))
-              ],
+            PageHeader(),
+            NewsSection(
+              title: "For You",
             ),
-            const SizedBox(
-              height: 16,
+            SizedBox(height: 16),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  MainNewsCard(),
+                  MainNewsCard(),
+                ],
+              ),
             ),
-            const MainNewsCard()
+            SizedBox(height: 21),
+            NewsSection(
+              title: "Following",
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class NewsSection extends StatelessWidget {
+  final String title;
+
+  const NewsSection({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(Iconsax.add, color: Color(0xff323232)))
+        ],
       ),
     );
   }
@@ -43,6 +72,7 @@ class PageHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.fromLTRB(20, 11, 20, 11),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -50,7 +80,12 @@ class PageHeader extends StatelessWidget {
             'NewsWave.',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
           ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Iconsax.notification4,
+                color: Color(0xff323232),
+              ))
         ],
       ),
     );
