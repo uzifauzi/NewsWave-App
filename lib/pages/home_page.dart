@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../widgets/main_news_card.dart';
+import '../widgets/news_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xfffcfffd),
         body: SingleChildScrollView(
@@ -34,78 +35,9 @@ class HomePage extends StatelessWidget {
                 title: "Following",
               ),
               SizedBox(height: 4),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Card(
-                  clipBehavior: Clip.antiAlias,
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    height: 150,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Image.asset(
-                              'assets/rapper.jpg',
-                              height: 96,
-                              width: 96,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          flex: 7,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(width: 4),
-                                  Text(
-                                    'Alexia Virgie',
-                                    style: TextStyle(
-                                        fontSize: 12, color: Color(0xff18272a)),
-                                  ),
-                                  Spacer(),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.bookmark_border,
-                                        color: Color(0xff18272a),
-                                      )),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.more_horiz,
-                                        color: Color(0xff18272a),
-                                      )),
-                                ],
-                              ),
-                              Text(
-                                  'Fusion of Retro Glamour and Futuristic Trends',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 16,
-                                      color: Color(0xff18272a))),
-                              SizedBox(height: 4),
-                              Text('8 min read • 2 hr ago',
-                                  style: TextStyle(color: Color(0xff18272a))),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              NewsCard(),
+              SizedBox(height: 4),
+              NewsCard(),
               SizedBox(height: 4),
             ],
           ),
