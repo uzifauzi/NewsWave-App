@@ -115,7 +115,7 @@ class DiscoverPage extends StatelessWidget {
                         width: 165,
                         height: 68,
                         decoration: BoxDecoration(
-                          color: const Color(0xffadc6b0),
+                          color: const Color(0xff55625b),
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
@@ -131,7 +131,7 @@ class DiscoverPage extends StatelessWidget {
                         width: 165,
                         height: 68,
                         decoration: BoxDecoration(
-                          color: const Color(0xffadc6b0),
+                          color: const Color(0xff55625b),
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newswave_app/pages/bookmark_page.dart';
 import 'package:newswave_app/pages/discover_page.dart';
 import 'package:newswave_app/pages/home_page.dart';
 
@@ -17,7 +18,7 @@ class _NavigationPageState extends State<NavigationPage> {
   final List<Widget> _pages = [
     const HomePage(),
     const DiscoverPage(),
-    const Center(child: Text("Bookmark Page")),
+    const BookmarkPage(),
     const Center(child: Text("Profile Page")),
   ];
 
