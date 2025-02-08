@@ -64,7 +64,7 @@ class BookmarkCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 clipBehavior: Clip.hardEdge,
-                child: Image.network('https://picsum.photos/id/237/250',
+                child: Image.network('https://picsum.photos/id/230/250',
                     fit: BoxFit.cover),
               ),
               Container(
@@ -86,7 +86,7 @@ class BookmarkCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 clipBehavior: Clip.hardEdge,
-                child: Image.network('https://picsum.photos/seed/picsum/250',
+                child: Image.network('https://picsum.photos/id/229/250',
                     fit: BoxFit.cover),
               ),
             ],

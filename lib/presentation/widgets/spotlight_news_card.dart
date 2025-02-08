@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:newswave_app/pages/detail_news_page.dart';
+import 'package:newswave_app/presentation/pages/detail_news_page.dart';
+
+import '../../data/models/news.dart';
 
 class SpotlightNewsCard extends StatelessWidget {
+  final News news;
+
   const SpotlightNewsCard({
     super.key,
+    required this.news,
   });
 
   @override
@@ -13,10 +18,11 @@ class SpotlightNewsCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const DetailNewsPage(),
+              builder: (context) => DetailNewsPage(newsId: news.id),
             ));
       },
       child: Container(
+        key: ValueKey(news.id),
         margin: const EdgeInsets.only(right: 12),
         padding: const EdgeInsets.all(12),
         width: 152,
@@ -40,8 +46,8 @@ class SpotlightNewsCard extends StatelessWidget {
               height: 88,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                image: const DecorationImage(
-                  image: AssetImage('assets/mountain.jpg'),
+                image: DecorationImage(
+                  image: NetworkImage(news.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -55,9 +61,9 @@ class SpotlightNewsCard extends StatelessWidget {
                     color: const Color(0xff182828).withOpacity(0.7),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: const Text(
-                    'Business',
-                    style: TextStyle(fontSize: 10, color: Colors.white),
+                  child: Text(
+                    news.newsCategory.name,
+                    style: const TextStyle(fontSize: 10, color: Colors.white),
                   )),
             ),
             const SizedBox(height: 8),
@@ -73,13 +79,17 @@ class SpotlightNewsCard extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                const SizedBox(width: 11),
-                const Text('Ava Louise', style: TextStyle(fontSize: 12)),
+                const SizedBox(width: 8),
+                Text(
+                  news.author ?? '-',
+                  style: TextStyle(fontSize: 12),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
-            const Text(
-              'Yosemite climbing Boom',
-              style: TextStyle(
+            Text(
+              news.title,
+              style: const TextStyle(
                   color: Color(0xff18272a),
                   fontSize: 12,
                   fontWeight: FontWeight.w700,

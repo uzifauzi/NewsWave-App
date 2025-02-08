@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:newswave_app/pages/navigation_page.dart';
+import 'package:newswave_app/presentation/pages/home_page.dart';
+import 'package:newswave_app/presentation/pages/navigation_page.dart';
+import 'package:newswave_app/presentation/pages/testing_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         useMaterial3: true,
       ),
-      home: const NavigationPage(),
+      home: const HomePage(),
     );
   }
 }

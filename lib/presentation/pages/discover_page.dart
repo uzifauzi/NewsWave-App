@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:newswave_app/data/models/news.dart';
 
 import '../widgets/spotlight_news_card.dart';
 
@@ -33,7 +34,13 @@ class DiscoverPage extends StatelessWidget {
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                                width: 3, color: Color(0xff313131)),
+                                width: 2, color: Color(0xff313131)),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 3,
+                                color: Color(0xff313131).withOpacity(0.5)),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           hintText: 'Search...',
@@ -54,18 +61,17 @@ class DiscoverPage extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                 ),
                 const SizedBox(height: 8),
-                const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        SpotlightNewsCard(),
-                        SpotlightNewsCard(),
-                        SpotlightNewsCard(),
-                        SpotlightNewsCard(),
-                      ],
-                    ),
+                SizedBox(
+                  height:
+                      220, // Tentukan tinggi jika ListView berada di scroll horizontal
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.all(8.0),
+                    itemCount: newsList.length,
+                    itemBuilder: (context, index) {
+                      final news = newsList[index];
+                      return SpotlightNewsCard(news: news);
+                    },
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -74,18 +80,17 @@ class DiscoverPage extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                 ),
                 const SizedBox(height: 8),
-                const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        SpotlightNewsCard(),
-                        SpotlightNewsCard(),
-                        SpotlightNewsCard(),
-                        SpotlightNewsCard(),
-                      ],
-                    ),
+                SizedBox(
+                  height:
+                      220, // Tentukan tinggi jika ListView berada di scroll horizontal
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.all(8.0),
+                    itemCount: newsList.length,
+                    itemBuilder: (context, index) {
+                      final news = newsList[index];
+                      return SpotlightNewsCard(news: news);
+                    },
                   ),
                 ),
                 const SizedBox(height: 20),

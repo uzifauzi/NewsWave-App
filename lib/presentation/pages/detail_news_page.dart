@@ -3,11 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../data/models/news.dart';
+
 class DetailNewsPage extends StatelessWidget {
-  const DetailNewsPage({super.key});
+  final String newsId;
+
+  const DetailNewsPage({
+    super.key,
+    required this.newsId,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final News selectedNews = newsList.firstWhere(
+      (news) => news.id == newsId,
+    );
+
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -20,8 +31,8 @@ class DetailNewsPage extends StatelessWidget {
                   height: 452,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(36),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/mountain_p.jpg'),
+                    image: DecorationImage(
+                      image: NetworkImage(selectedNews.imageUrl),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -84,9 +95,9 @@ class DetailNewsPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(12.0),
                                     color: const Color(0xffb3182828)
                                         .withOpacity(0.7)),
-                                child: const Text(
-                                  "Travel",
-                                  style: TextStyle(
+                                child: Text(
+                                  selectedNews.newsCategory.name,
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -97,9 +108,9 @@ class DetailNewsPage extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 12),
-                          const Text(
-                            'The Power and Beauty of the Natural World',
-                            style: TextStyle(
+                          Text(
+                            selectedNews.title,
+                            style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white),
@@ -117,9 +128,9 @@ class DetailNewsPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 11),
-                              const Text(
-                                'Olivia Rose',
-                                style: TextStyle(
+                              Text(
+                                selectedNews.author ?? '-',
+                                style: const TextStyle(
                                     fontSize: 12, color: Colors.white),
                               ),
                               const SizedBox(width: 15),
@@ -139,17 +150,17 @@ class DetailNewsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'The Healing Power of Nature',
-                  style: TextStyle(
+                Text(
+                  selectedNews.title,
+                  style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
                       color: Color(0xff161719)),
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  'Nature has a remarkable ability to heal and restore. Studies have shown that spending time in natural environments can reduce stress, improve mood, and enhance overall well-being.',
-                  style: TextStyle(
+                Text(
+                  selectedNews.description,
+                  style: const TextStyle(
                       fontSize: 12, color: Color(0xff161719), height: 2),
                 ),
                 const SizedBox(height: 11),
