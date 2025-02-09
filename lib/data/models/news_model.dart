@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:newswave_app/domain/entities/news.dart';
 
 part 'news_model.g.dart';
 
@@ -29,4 +30,16 @@ class NewsModel {
       _$NewsModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$NewsModelToJson(this);
+
+  News toEntity() {
+    return News(
+      articleId: articleId,
+      imageUrl: imageUrl,
+      title: title,
+      link: link,
+      sourceName: sourceName,
+      pubDate: pubDate,
+      category: category,
+    );
+  }
 }

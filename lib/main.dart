@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:newswave_app/presentation/pages/home_page.dart';
+import 'package:newswave_app/presentation/pages/navigation_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:newswave_app/style/theme/news_theme.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -14,11 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'NewsWave',
-      theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
+      theme: NewsTheme.lightTheme,
+      darkTheme: NewsTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      home: const NavigationPage(),
     );
   }
 }

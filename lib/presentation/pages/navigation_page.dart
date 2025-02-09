@@ -17,7 +17,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const DiscoverPage(),
+    // const DiscoverPage(),
     const BookmarkPage(),
     const Center(child: Text("Profile Page")),
   ];

@@ -1,24 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+
+import '../widgets/main_news_card.dart';
 
 class TrendingPage extends StatelessWidget {
   const TrendingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
-        children: List.generate(
-          10,
-          (index) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 120,
-              width: double.infinity,
-              color: Colors.blue[100 * ((index % 9) + 1)],
-              child: Center(child: Text("Trending Item ${index + 1}")),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                MainNewsCard(),
+                MainNewsCard(),
+              ],
             ),
           ),
-        ),
+        ],
+      ),
+    );
+  }
+}
+
+class NewsSection extends StatelessWidget {
+  final String title;
+
+  const NewsSection({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(Iconsax.add, color: Color(0xff323232)))
+        ],
+      ),
+    );
+  }
+}
+
+class PageHeader extends StatelessWidget {
+  const PageHeader({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 11, 20, 11),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'NewsWave.',
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Iconsax.notification4,
+                color: Color(0xff323232),
+              ))
+        ],
       ),
     );
   }

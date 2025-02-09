@@ -59,6 +59,11 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
                       setState(() {
                         currentIndex = index;
                       });
+                      _pageController.animateToPage(
+                        index,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
                     },
                     child: Padding(
                       padding:
@@ -76,7 +81,7 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
                           ),
                           const SizedBox(height: 4),
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             height: 3,
                             width: isSelected ? 40 : 0,
                             decoration: BoxDecoration(
@@ -100,13 +105,8 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
                 setState(() {
                   currentIndex = index;
                 });
-                _pageController.animateToPage(
-                  index,
-                  duration: const Duration(seconds: 2),
-                  curve: Curves.easeInOut,
-                );
               },
-              children: [
+              children: const [
                 TrendingPage(),
                 FoodPage(),
                 Center(

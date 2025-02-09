@@ -47,10 +47,10 @@ class CustomBottomNavbar extends StatelessWidget {
               icon: Icon(Iconsax.home),
               label: 'Home',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.search_normal),
-              label: 'Discover',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Iconsax.search_normal),
+            //   label: 'Discover',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(Iconsax.bookmark),
               label: 'Bookmark',
