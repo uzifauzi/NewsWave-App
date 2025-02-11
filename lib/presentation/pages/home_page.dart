@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newswave_app/presentation/widgets/custom_tab_layout.dart';
 
-import '../widgets/main_news_card.dart';
-import '../widgets/news_card.dart';
+// import '../widgets/main_news_card.dart';
+// import '../widgets/news_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,7 +21,6 @@ class HomePage extends StatelessWidget {
               title: "For You",
             ),
             SizedBox(height: 16),
-            // TODO: BUAT TAB LAYOUT
             Expanded(
               child: CustomTabLayout(),
             ),

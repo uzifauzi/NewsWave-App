@@ -2,5 +2,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class KeyConstant {
   static String apiKey = dotenv.env['API_KEY'] ?? "";
-  static const idCountry = "id";
+  static String idCountry = dotenv.env['COUNTRY'] ?? "";
+  static String topCategory = dotenv.env['TOP_CATEGORY'] ?? "";
+  static String sportsCategory = dotenv.env['SPORTS_CATEGORY'] ?? "";
 }

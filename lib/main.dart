@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:newswave_app/core/injection.dart';
 import 'package:newswave_app/presentation/pages/navigation_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:newswave_app/style/theme/news_theme.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
+  init();
+  runApp(
+    const MyApp(), // Pastikan di level paling atas
+  );
 }
 
 class MyApp extends StatelessWidget {

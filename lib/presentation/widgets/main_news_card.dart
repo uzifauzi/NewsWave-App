@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:newswave_app/domain/entities/news.dart';
 
 class MainNewsCard extends StatelessWidget {
+  final News news;
+
   const MainNewsCard({
     super.key,
+    required this.news,
   });
 
   @override
@@ -13,8 +17,8 @@ class MainNewsCard extends StatelessWidget {
       width: 315,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        image: const DecorationImage(
-          image: AssetImage('assets/vespa.jpg'),
+        image: DecorationImage(
+          image: NetworkImage(news.imageUrl ?? 'assets/vespa.jpg'),
           fit: BoxFit.cover,
         ),
       ),
@@ -43,27 +47,29 @@ class MainNewsCard extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
                   color: const Color(0xff182828).withOpacity(0.8)),
-              child: const Text(
-                "Business",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+              child: Text(
+                (news.category?.isNotEmpty ?? false)
+                    ? news.category!.first
+                    : 'No Category',
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w500),
               ),
             ),
             const Spacer(),
-            const Text(
-              "CNN Indonesia",
-              style:
-                  TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
+            Text(
+              news.sourceName ?? '-',
+              style: const TextStyle(
+                  fontWeight: FontWeight.w500, color: Colors.white),
             ),
             const SizedBox(height: 4),
-            const Text("Vespa Navigation: Navigating The Scooter Scene",
-                style: TextStyle(
+            Text(news.title ?? '-',
+                style: const TextStyle(
                     fontWeight: FontWeight.w700, color: Colors.white)),
             const SizedBox(height: 4),
             Row(
               children: [
-                const Text("8 min read - 2 hr ago",
-                    style: TextStyle(color: Colors.white)),
+                Text(news.pubDate.toString(),
+                    style: const TextStyle(color: Colors.white)),
                 const Spacer(),
                 IconButton(
                     onPressed: () {},
