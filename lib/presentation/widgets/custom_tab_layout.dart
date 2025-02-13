@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newswave_app/presentation/pages/food_page.dart';
+import 'package:newswave_app/presentation/pages/sports_page.dart';
 import 'package:newswave_app/presentation/pages/trending_page.dart';
 
 class CustomTabLayout extends StatefulWidget {
@@ -12,7 +12,7 @@ class CustomTabLayout extends StatefulWidget {
 class _CustomTabLayoutState extends State<CustomTabLayout> {
   List<String> tabs = [
     "Trending",
-    "Food",
+    "Sports",
     "Travel",
     "Fashion",
     "Education",
@@ -76,7 +76,7 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
                               fontWeight: isSelected
                                   ? FontWeight.bold
                                   : FontWeight.normal,
-                              color: isSelected ? Colors.blue : Colors.black,
+                              color: isSelected ? Colors.black : Colors.grey,
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -85,8 +85,9 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
                             height: 3,
                             width: isSelected ? 40 : 0,
                             decoration: BoxDecoration(
-                              color:
-                                  isSelected ? Colors.blue : Colors.transparent,
+                              color: isSelected
+                                  ? Colors.black
+                                  : Colors.transparent,
                               borderRadius: BorderRadius.circular(2),
                             ),
                           ),
@@ -108,7 +109,7 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
               },
               children: const [
                 TrendingPage(),
-                FoodPage(),
+                SportsPage(),
                 Center(
                     child:
                         Text("Halaman Travel", style: TextStyle(fontSize: 20))),

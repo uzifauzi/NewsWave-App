@@ -15,7 +15,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       final failureOrSuccess = await getAllNewsUseCase.call();
 
       failureOrSuccess.fold(
-        (failure) => emit(NewsError("Failed to fetch news")),
+        (failure) => emit(const NewsError("Failed to fetch news")),
         (newsList) => emit(NewsSuccess(newsList)),
       );
     });

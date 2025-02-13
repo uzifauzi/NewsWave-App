@@ -8,7 +8,7 @@ void main() async {
   await dotenv.load(fileName: ".env");
   init();
   runApp(
-    const MyApp(), // Pastikan di level paling atas
+    const MyApp(),
   );
 }
 

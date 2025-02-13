@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newswave_app/core/injection.dart';
 import 'package:newswave_app/presentation/bloc/news_bloc/news_bloc.dart';
-import 'package:newswave_app/presentation/widgets/news_card.dart';
 
 import '../widgets/main_news_card.dart';
 
@@ -49,7 +48,6 @@ class TrendingPage extends StatelessWidget {
             const SizedBox(height: 21),
             NewsSection(title: "Following"),
             const SizedBox(height: 15),
-            NewsCard(),
           ],
         ),
       ),

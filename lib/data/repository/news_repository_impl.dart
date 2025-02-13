@@ -18,4 +18,14 @@ class NewsRepositoryImpl implements NewsRepository {
       return const Left(ServerFailure('Cannot connect to server.'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<News>>> getSportsNews() async {
+    try {
+      final result = await newsRemoteDataSource.getSportsNews();
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServiceException {
+      return const Left(ServerFailure('Cannot connect to server.'));
+    }
+  }
 }

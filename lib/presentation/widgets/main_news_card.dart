@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:newswave_app/domain/entities/news.dart';
 
+import '../../core/utils.dart';
+
 class MainNewsCard extends StatelessWidget {
   final News news;
 
@@ -11,6 +13,8 @@ class MainNewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedDate = formatDate(news.pubDate);
+
     return Container(
       margin: const EdgeInsets.only(right: 16),
       height: 405,
@@ -68,7 +72,7 @@ class MainNewsCard extends StatelessWidget {
             const SizedBox(height: 4),
             Row(
               children: [
-                Text(news.pubDate.toString(),
+                Text(formattedDate,
                     style: const TextStyle(color: Colors.white)),
                 const Spacer(),
                 IconButton(
