@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newswave_app/core/injection.dart';
+import 'package:newswave_app/domain/entities/news.dart';
 import 'package:newswave_app/presentation/bloc/news_bloc/news_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../widgets/main_news_card.dart';
+import '../widgets/news_card.dart';
 
 class TrendingPage extends StatelessWidget {
   const TrendingPage({super.key});
@@ -27,7 +30,26 @@ class TrendingPage extends StatelessWidget {
             BlocBuilder<NewsBloc, NewsState>(
               builder: (context, state) {
                 if (state is NewsLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  // return const Center(child: CircularProgressIndicator());
+                  return Skeletonizer(
+                    enabled: true,
+                    child: SizedBox(
+                      height: 400,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return const MainNewsCard(
+                            news: News(
+                                articleId: "1",
+                                imageUrl: "https://placehold.co/600x400"),
+                          );
+                        },
+                      ),
+                    ),
+                  );
                 } else if (state is NewsSuccess) {
                   // Menampilkan hanya 5 berita pertama
                   final newsList = state.newsList.take(5).toList();
@@ -46,8 +68,41 @@ class TrendingPage extends StatelessWidget {
               },
             ),
             const SizedBox(height: 21),
-            NewsSection(title: "Following"),
+            const NewsSection(title: "Following"),
             const SizedBox(height: 15),
+            // munculkan data ke-6 sampai terakhir menggunakan widget NewsCard
+            BlocBuilder<NewsBloc, NewsState>(
+              builder: (context, state) {
+                if (state is NewsLoading) {
+                  // return const Center(child: CircularProgressIndicator());
+                  return Skeletonizer(
+                    enabled: true,
+                    child: SizedBox(
+                      height: 300,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return const NewsCard(
+                            news: News(articleId: "1"),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                } else if (state is NewsSuccess) {
+                  final followingNewsList =
+                      state.newsList.skip(5).take(5).toList();
+                  return Column(
+                    children: followingNewsList
+                        .map((news) => NewsCard(news: news))
+                        .toList(),
+                  );
+                }
+                return const SizedBox(); // Jika belum sukses, kosongkan agar tidak error
+              },
+            ),
           ],
         ),
       ),
@@ -74,34 +129,6 @@ class NewsSection extends StatelessWidget {
           IconButton(
               onPressed: () {},
               icon: const Icon(Iconsax.add, color: Color(0xff323232)))
-        ],
-      ),
-    );
-  }
-}
-
-class PageHeader extends StatelessWidget {
-  const PageHeader({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(20, 11, 20, 11),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            'NewsWave.',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-          ),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Iconsax.notification4,
-                color: Color(0xff323232),
-              ))
         ],
       ),
     );

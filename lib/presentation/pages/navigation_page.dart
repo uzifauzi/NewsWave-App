@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:newswave_app/presentation/pages/bookmark_page.dart';
-import 'package:newswave_app/presentation/pages/discover_page.dart';
 import 'package:newswave_app/presentation/pages/home_page.dart';
 
 import '../widgets/custom_bottom_navbar.dart';

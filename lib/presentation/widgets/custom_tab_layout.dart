@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newswave_app/presentation/pages/sports_page.dart';
+import 'package:newswave_app/presentation/pages/tech_page.dart';
 import 'package:newswave_app/presentation/pages/trending_page.dart';
 
 class CustomTabLayout extends StatefulWidget {
@@ -13,7 +14,7 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
   List<String> tabs = [
     "Trending",
     "Sports",
-    "Travel",
+    "Technology",
     "Fashion",
     "Education",
     "Business",
@@ -110,9 +111,7 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
               children: const [
                 TrendingPage(),
                 SportsPage(),
-                Center(
-                    child:
-                        Text("Halaman Travel", style: TextStyle(fontSize: 20))),
+                TechPage(),
                 Center(
                     child: Text("Halaman Fashion",
                         style: TextStyle(fontSize: 20))),

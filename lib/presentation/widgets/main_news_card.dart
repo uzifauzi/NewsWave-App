@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:newswave_app/domain/entities/news.dart';
 
 import '../../core/utils.dart';
@@ -11,9 +12,26 @@ class MainNewsCard extends StatelessWidget {
     required this.news,
   });
 
+  bool isValidImageUrl(String? url) {
+    return url != null &&
+        url.startsWith('http') &&
+        (url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png'));
+  }
+
+  Widget buildImage(String imageUrl) {
+    if (imageUrl.endsWith('.svg')) {
+      return SvgPicture.network(imageUrl,
+          placeholderBuilder: (_) => Image.asset("assets/vespa.jpg"));
+    } else {
+      return Image.network(imageUrl,
+          errorBuilder: (_, __, ___) => Image.asset("assets/vespa.jpg"));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    String formattedDate = formatDate(news.pubDate);
+    String formattedDate =
+        news.pubDate != null ? formatDate(news.pubDate!) : '-';
 
     return Container(
       margin: const EdgeInsets.only(right: 16),
@@ -22,7 +40,11 @@ class MainNewsCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
-          image: NetworkImage(news.imageUrl ?? 'assets/vespa.jpg'),
+          image: NetworkImage(
+            news.imageUrl != null && news.imageUrl!.isNotEmpty
+                ? news.imageUrl!
+                : "https://placehold.co/600x400",
+          ),
           fit: BoxFit.cover,
         ),
       ),

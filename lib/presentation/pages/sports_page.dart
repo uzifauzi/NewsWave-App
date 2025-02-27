@@ -28,16 +28,8 @@ class SportsPage extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is SportsNewsSuccess) {
                   final sportsNewsList = state.sportsNewsList;
-                  // return SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     children: newsList
-                  //         .map((news) => MainNewsCard(news: news))
-                  //         .toList(),
-                  //   ),
-                  // );
                   return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: sportsNewsList.length,
                     itemBuilder: (context, index) {

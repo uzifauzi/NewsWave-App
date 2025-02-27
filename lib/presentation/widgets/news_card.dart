@@ -30,10 +30,18 @@ class NewsCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
-                  news.imageUrl ?? "-",
+                  news.imageUrl ?? "https://placehold.co/600x400",
                   height: 96,
                   width: 96,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      "assets/vespa.jpg", // Ganti dengan gambar placeholder dari asset
+                      height: 96,
+                      width: 96,
+                      fit: BoxFit.cover,
+                    );
+                  },
                 ),
               ),
             ),
