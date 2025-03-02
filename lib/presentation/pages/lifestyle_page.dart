@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newswave_app/core/injection.dart';
-import 'package:newswave_app/domain/entities/news.dart';
-import 'package:newswave_app/presentation/bloc/sports_bloc/sports_news_bloc.dart';
-import 'package:newswave_app/presentation/widgets/news_card.dart';
+import 'package:newswave_app/presentation/bloc/bloc/lifestyle_news_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class SportsPage extends StatelessWidget {
-  const SportsPage({super.key});
+import '../../core/injection.dart';
+import '../../domain/entities/news.dart';
+import '../widgets/news_card.dart';
+
+class LifestylePage extends StatelessWidget {
+  const LifestylePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final sportsNewsBloc = di<SportsNewsBloc>();
+    final lifestyleNewsBloc = di<LifestyleNewsBloc>();
 
-    return BlocProvider<SportsNewsBloc>(
-      create: (_) {
-        final bloc = sportsNewsBloc;
-        bloc.add(GetSportsNewsEvent()); // Kirim event untuk memuat data
+    return BlocProvider<LifestyleNewsBloc>(
+      create: (context) {
+        final bloc = lifestyleNewsBloc;
+        bloc.add(GetLifestyleNewsEvent());
         return bloc;
       },
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BlocBuilder<SportsNewsBloc, SportsNewsState>(
+            BlocBuilder<LifestyleNewsBloc, LifestyleNewsState>(
               builder: (context, state) {
-                if (state is SportsNewsLoading) {
+                if (state is LifestyleNewsLoading) {
                   return Center(
                       child: Skeletonizer(
                     child: ListView.builder(
@@ -42,20 +41,20 @@ class SportsPage extends StatelessWidget {
                       },
                     ),
                   ));
-                } else if (state is SportsNewsSuccess) {
-                  final sportsNewsList = state.sportsNewsList;
+                } else if (state is LifestyleNewsSuccess) {
+                  final lifestyleNewsList = state.lifestyleNewsList;
                   return ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: sportsNewsList.length,
+                    itemCount: lifestyleNewsList.length,
                     itemBuilder: (context, index) {
-                      final sportNews = sportsNewsList[index];
+                      final sportNews = lifestyleNewsList[index];
                       return NewsCard(
                         news: sportNews,
                       );
                     },
                   );
-                } else if (state is SportsNewsError) {
+                } else if (state is LifestyleNewsError) {
                   return Center(child: Text(state.message));
                 }
                 return const Center(child: Text("No Data Available"));

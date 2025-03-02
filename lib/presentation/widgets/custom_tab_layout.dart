@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newswave_app/presentation/pages/lifestyle_page.dart';
 import 'package:newswave_app/presentation/pages/sports_page.dart';
 import 'package:newswave_app/presentation/pages/tech_page.dart';
 import 'package:newswave_app/presentation/pages/trending_page.dart';
@@ -15,7 +16,7 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
     "Trending",
     "Sports",
     "Technology",
-    "Fashion",
+    "Lifestyle",
     "Education",
     "Business",
   ];
@@ -112,9 +113,7 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
                 TrendingPage(),
                 SportsPage(),
                 TechPage(),
-                Center(
-                    child: Text("Halaman Fashion",
-                        style: TextStyle(fontSize: 20))),
+                LifestylePage(),
                 Center(
                     child: Text("Halaman Education",
                         style: TextStyle(fontSize: 20))),

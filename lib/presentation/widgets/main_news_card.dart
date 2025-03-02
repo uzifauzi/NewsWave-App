@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:newswave_app/domain/entities/news.dart';
 
 import '../../core/utils.dart';
@@ -11,22 +10,6 @@ class MainNewsCard extends StatelessWidget {
     super.key,
     required this.news,
   });
-
-  bool isValidImageUrl(String? url) {
-    return url != null &&
-        url.startsWith('http') &&
-        (url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png'));
-  }
-
-  Widget buildImage(String imageUrl) {
-    if (imageUrl.endsWith('.svg')) {
-      return SvgPicture.network(imageUrl,
-          placeholderBuilder: (_) => Image.asset("assets/vespa.jpg"));
-    } else {
-      return Image.network(imageUrl,
-          errorBuilder: (_, __, ___) => Image.asset("assets/vespa.jpg"));
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +58,7 @@ class MainNewsCard extends StatelessWidget {
                   color: const Color(0xff182828).withOpacity(0.8)),
               child: Text(
                 (news.category?.isNotEmpty ?? false)
-                    ? news.category!.first
+                    ? news.category!.first.capitalizeFirstLetter()
                     : 'No Category',
                 style: const TextStyle(
                     color: Colors.white, fontWeight: FontWeight.w500),

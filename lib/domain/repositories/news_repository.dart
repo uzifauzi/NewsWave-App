@@ -6,4 +6,5 @@ abstract class NewsRepository {
   Future<Either<Failure, List<News>>> getAllNews();
   Future<Either<Failure, List<News>>> getSportsNews();
   Future<Either<Failure, List<News>>> getTechNews();
+  Future<Either<Failure, List<News>>> getLifestyleNews();
 }

@@ -30,7 +30,6 @@ class TrendingPage extends StatelessWidget {
             BlocBuilder<NewsBloc, NewsState>(
               builder: (context, state) {
                 if (state is NewsLoading) {
-                  // return const Center(child: CircularProgressIndicator());
                   return Skeletonizer(
                     enabled: true,
                     child: SizedBox(
@@ -92,8 +91,7 @@ class TrendingPage extends StatelessWidget {
                     ),
                   );
                 } else if (state is NewsSuccess) {
-                  final followingNewsList =
-                      state.newsList.skip(5).take(5).toList();
+                  final followingNewsList = state.newsList.skip(5).toList();
                   return Column(
                     children: followingNewsList
                         .map((news) => NewsCard(news: news))

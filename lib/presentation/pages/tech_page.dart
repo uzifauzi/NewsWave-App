@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newswave_app/core/injection.dart';
 import 'package:newswave_app/presentation/bloc/tech_bloc/tech_news_bloc.dart';
 import 'package:newswave_app/presentation/widgets/news_card.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../domain/entities/news.dart';
 
 class TechPage extends StatelessWidget {
   const TechPage({super.key});
@@ -25,7 +28,21 @@ class TechPage extends StatelessWidget {
             BlocBuilder<TechNewsBloc, TechNewsState>(
               builder: (context, state) {
                 if (state is TechNewsLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                      child: Skeletonizer(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 4,
+                      itemBuilder: (context, index) {
+                        return const NewsCard(
+                          news: News(
+                            articleId: "1",
+                          ),
+                        );
+                      },
+                    ),
+                  ));
                 } else if (state is TechNewsSuccess) {
                   final techNewsList = state.techNewsList;
                   return ListView.builder(
