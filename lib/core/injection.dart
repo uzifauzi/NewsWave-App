@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:newswave_app/domain/usecases/get_lifestyle_news.dart';
 import 'package:newswave_app/domain/usecases/get_sports_news.dart';
 import 'package:newswave_app/domain/usecases/get_tech_news.dart';
-import 'package:newswave_app/presentation/bloc/bloc/lifestyle_news_bloc.dart';
+import 'package:newswave_app/presentation/bloc/lifestyle_bloc/lifestyle_news_bloc.dart';
 import 'package:newswave_app/presentation/bloc/sports_bloc/sports_news_bloc.dart';
 import 'package:newswave_app/presentation/bloc/tech_bloc/tech_news_bloc.dart';
 

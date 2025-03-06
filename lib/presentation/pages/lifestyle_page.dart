@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newswave_app/presentation/bloc/bloc/lifestyle_news_bloc.dart';
+import 'package:newswave_app/presentation/bloc/lifestyle_bloc/lifestyle_news_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../core/injection.dart';
