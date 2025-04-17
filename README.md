@@ -20,9 +20,9 @@ Welcome to **NewsWave** — your go-to mobile app for exploring the latest and m
 
 ## 📱 Screenshots
 
-| Home | Detail |
-|------|--------|
-| ![home](assets/screenshots/home.png) | ![detail](assets/screenshots/detail.png) |
+| Home | Loading | Tab |
+|------|--------|--------|
+| <img src="assets/screenshot/home_page.png" alt="drawing" width="200"/> | <img src="assets/screenshot/loading_page.png" alt="drawing" width="200"/> | <img src="assets/screenshot/sport_page.png" alt="drawing" width="200"/>
 
 ---
 
@@ -66,7 +66,7 @@ Here are the main packages powering this app:
 
 📰 News API: [newsdata.io](https://newsdata.io/)
 
-🎨 UI Design: Figma - NewsWave Design
+🎨 UI Design: This app's design is inspired by Mumtaz Aaliyah Fasya - [NewsWave Design](https://www.linkedin.com/posts/mumtaz-aaliyah-fasya_design-ui-uiux-activity-7231264963829321728-aXAI?utm_source=share&utm_medium=member_desktop&rcm=ACoAADPQUowBAlWgMR2UXNoo8wmJx1eiANZQhXY)
 
 ---
 
