@@ -34,9 +34,10 @@ class SportsPage extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 4,
                       itemBuilder: (context, index) {
-                        return const NewsCard(
+                        return NewsCard(
                           news: News(
                             articleId: "1",
+                            imageUrl: "https://placehold.co/600x400",
                           ),
                         );
                       },

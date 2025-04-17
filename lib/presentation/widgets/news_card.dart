@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newswave_app/domain/entities/news.dart';
 
 import '../../core/utils.dart';
+import '../bloc/bookmark_bloc/bookmark_news_bloc.dart';
 
-class NewsCard extends StatelessWidget {
+class NewsCard extends StatefulWidget {
   final News news;
   const NewsCard({
     super.key,
@@ -11,8 +13,46 @@ class NewsCard extends StatelessWidget {
   });
 
   @override
+  State<NewsCard> createState() => _NewsCardState();
+}
+
+class _NewsCardState extends State<NewsCard> {
+  @override
   Widget build(BuildContext context) {
-    String formattedDate = formatDate(news.pubDate);
+    String formattedDate = formatDate(widget.news.pubDate);
+
+    bool isBookmarked = false;
+
+    void checkIfBookmarked() {
+      final state = context.read<BookmarkNewsBloc>().state;
+      if (state is BookmarkNewsLoaded) {
+        setState(() {
+          isBookmarked =
+              state.newsList.any((news) => news.title == widget.news.title);
+        });
+      }
+    }
+
+    @override
+    void initState() {
+      super.initState();
+      checkIfBookmarked();
+    }
+
+    void _toggleBookmark() {
+      final bloc = context.read<BookmarkNewsBloc>();
+      if (isBookmarked) {
+        bloc.add(RemoveBookmarkNews(widget.news));
+      } else {
+        bloc.add(SaveBookmarkNews(widget.news));
+      }
+
+      setState(() {
+        isBookmarked = !isBookmarked;
+      });
+
+      print("IS BOOKMARK: $isBookmarked");
+    }
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -26,25 +66,32 @@ class NewsCard extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              flex: 3,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  news.imageUrl ?? "https://placehold.co/600x400",
-                  height: 96,
-                  width: 96,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      "assets/vespa.jpg", // Ganti dengan gambar placeholder dari asset
-                      height: 96,
-                      width: 96,
-                      fit: BoxFit.cover,
-                    );
-                  },
-                ),
-              ),
-            ),
+                flex: 3,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: widget.news.imageUrl != null &&
+                          widget.news.imageUrl!.startsWith("http")
+                      ? Image.network(
+                          widget.news.imageUrl!,
+                          height: 96,
+                          width: 96,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              "assets/vespa.jpg",
+                              height: 96,
+                              width: 96,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        )
+                      : Image.asset(
+                          "assets/vespa.jpg",
+                          height: 96,
+                          width: 96,
+                          fit: BoxFit.cover,
+                        ),
+                )),
             const SizedBox(width: 10),
             Expanded(
               flex: 7,
@@ -56,17 +103,18 @@ class NewsCard extends StatelessWidget {
                     children: [
                       const SizedBox(width: 4),
                       Text(
-                        news.sourceName ?? '-',
+                        widget.news.sourceName ?? '-',
                         style: const TextStyle(
                             fontSize: 12, color: Color(0xff18272a)),
                       ),
                       const Spacer(),
                       IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.bookmark_border,
-                            color: Color(0xff18272a),
-                          )),
+                        onPressed: _toggleBookmark,
+                        icon: Icon(
+                          isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                          color: const Color(0xff18272a),
+                        ),
+                      ),
                       IconButton(
                           onPressed: () {},
                           icon: const Icon(
@@ -75,7 +123,7 @@ class NewsCard extends StatelessWidget {
                           )),
                     ],
                   ),
-                  Text(news.title ?? '-',
+                  Text(widget.news.title ?? '-',
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontWeight: FontWeight.w700,

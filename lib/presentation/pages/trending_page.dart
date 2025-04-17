@@ -6,6 +6,7 @@ import 'package:newswave_app/domain/entities/news.dart';
 import 'package:newswave_app/presentation/bloc/news_bloc/news_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../bloc/bookmark_bloc/bookmark_news_bloc.dart';
 import '../widgets/main_news_card.dart';
 import '../widgets/news_card.dart';
 
@@ -15,13 +16,21 @@ class TrendingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final newsBloc = di<NewsBloc>();
+    final bookmarkNewsBloc = di<BookmarkNewsBloc>();
 
-    return BlocProvider<NewsBloc>(
-      create: (_) {
-        final bloc = newsBloc;
-        bloc.add(GetAllNewsEvent()); // Kirim event untuk memuat data
-        return bloc;
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NewsBloc>(
+          create: (_) {
+            final bloc = newsBloc;
+            bloc.add(GetAllNewsEvent());
+            return bloc;
+          },
+        ),
+        BlocProvider<BookmarkNewsBloc>(
+          create: (_) => bookmarkNewsBloc,
+        ),
+      ],
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Column(
@@ -40,7 +49,7 @@ class TrendingPage extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: 5,
                         itemBuilder: (context, index) {
-                          return const MainNewsCard(
+                          return MainNewsCard(
                             news: News(
                                 articleId: "1",
                                 imageUrl: "https://placehold.co/600x400"),
@@ -73,7 +82,6 @@ class TrendingPage extends StatelessWidget {
             BlocBuilder<NewsBloc, NewsState>(
               builder: (context, state) {
                 if (state is NewsLoading) {
-                  // return const Center(child: CircularProgressIndicator());
                   return Skeletonizer(
                     enabled: true,
                     child: SizedBox(
@@ -83,7 +91,7 @@ class TrendingPage extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: 3,
                         itemBuilder: (context, index) {
-                          return const NewsCard(
+                          return NewsCard(
                             news: News(articleId: "1"),
                           );
                         },
@@ -94,7 +102,10 @@ class TrendingPage extends StatelessWidget {
                   final followingNewsList = state.newsList.skip(5).toList();
                   return Column(
                     children: followingNewsList
-                        .map((news) => NewsCard(news: news))
+                        .map((news) => BlocProvider.value(
+                              value: context.read<BookmarkNewsBloc>(),
+                              child: NewsCard(news: news),
+                            ))
                         .toList(),
                   );
                 }

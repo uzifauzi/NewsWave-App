@@ -49,7 +49,7 @@ class _CustomTabLayoutState extends State<CustomTabLayout> {
             child: Container(
               height: size.height * 0.04,
               width: double.infinity,
-              color: Colors.amber,
+              color: Colors.white,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: tabs.length,

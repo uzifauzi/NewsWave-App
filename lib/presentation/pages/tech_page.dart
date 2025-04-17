@@ -35,7 +35,7 @@ class TechPage extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 4,
                       itemBuilder: (context, index) {
-                        return const NewsCard(
+                        return NewsCard(
                           news: News(
                             articleId: "1",
                           ),

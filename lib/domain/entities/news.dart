@@ -1,15 +1,15 @@
 import 'package:equatable/equatable.dart';
 
 class News extends Equatable {
-  final String articleId;
-  final String? imageUrl;
-  final String? title;
-  final String? link;
-  final String? sourceName;
-  final DateTime? pubDate;
-  final List<String>? category;
+  String articleId;
+  String? imageUrl;
+  String? title;
+  String? link;
+  String? sourceName;
+  DateTime? pubDate;
+  List<String>? category;
 
-  const News({
+  News({
     required this.articleId,
     this.imageUrl,
     this.title,
@@ -17,6 +17,13 @@ class News extends Equatable {
     this.sourceName,
     this.pubDate,
     this.category,
+  });
+
+  News.bookmark({
+    required this.articleId,
+    required this.imageUrl,
+    required this.title,
+    required this.category,
   });
 
   @override

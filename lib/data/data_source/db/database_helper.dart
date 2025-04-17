@@ -41,7 +41,12 @@ class DatabaseHelper {
 
   Future<int> insertBookmarkNews(BookmarkNewsModel news) async {
     final db = await database;
-    return await db!.insert(_tblBookmarkNews, news.toJson());
+    final result = await db!.insert(_tblBookmarkNews, news.toMap());
+
+    print('Inserted bookmark news: ${news.toMap()}');
+    print('Insert result: $result'); // Harus lebih dari 0 jika berhasil
+
+    return result;
   }
 
   Future<int> removeBookmarkNews(BookmarkNewsModel news) async {
@@ -73,6 +78,7 @@ class DatabaseHelper {
     final List<Map<String, dynamic>> results =
         await db!.query(_tblBookmarkNews);
 
+    print('Fetched bookmark news: $results');
     return results;
   }
 }

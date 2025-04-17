@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
+import 'package:newswave_app/domain/entities/news.dart';
 
 class BookmarkNewsModel extends Equatable {
   final int? id; // Primary Key di SQLite
@@ -9,7 +10,7 @@ class BookmarkNewsModel extends Equatable {
   final String? imageUrl;
   final String? sourceName;
   final String? pubDate;
-  final List<String>? category; // Disimpan sebagai List
+  final List<String>? category;
 
   const BookmarkNewsModel({
     this.id,
@@ -22,7 +23,6 @@ class BookmarkNewsModel extends Equatable {
     this.category,
   });
 
-  // Konversi dari Map (Database) ke Model
   factory BookmarkNewsModel.fromMap(Map<String, dynamic> map) {
     return BookmarkNewsModel(
       id: map['id'],
@@ -32,13 +32,12 @@ class BookmarkNewsModel extends Equatable {
       imageUrl: map['image_url'],
       sourceName: map['source_name'],
       pubDate: map['pub_date'],
-      category: map['category'] != null
+      category: (map['category'] != null && map['category'].isNotEmpty)
           ? List<String>.from(jsonDecode(map['category']))
-          : null,
+          : [],
     );
   }
 
-  // Konversi dari Model ke Map (Database)
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -48,11 +47,10 @@ class BookmarkNewsModel extends Equatable {
       'image_url': imageUrl,
       'source_name': sourceName,
       'pub_date': pubDate,
-      'category': category != null ? jsonEncode(category) : null,
+      'category': category != null ? jsonEncode(category) : jsonEncode([]),
     };
   }
 
-  // Konversi dari JSON ke Model (untuk API)
   factory BookmarkNewsModel.fromJson(Map<String, dynamic> json) {
     return BookmarkNewsModel(
       id: json['id'],
@@ -67,7 +65,6 @@ class BookmarkNewsModel extends Equatable {
     );
   }
 
-  // Konversi dari Model ke JSON (untuk API)
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -81,7 +78,13 @@ class BookmarkNewsModel extends Equatable {
     };
   }
 
-  // Override Equatable agar model bisa dibandingkan
+  News toEntity() => News.bookmark(
+        articleId: articleId,
+        imageUrl: imageUrl,
+        title: title,
+        category: category,
+      );
+
   @override
   List<Object?> get props =>
       [id, articleId, title, link, imageUrl, sourceName, pubDate, category];
